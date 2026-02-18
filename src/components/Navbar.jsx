@@ -1,5 +1,6 @@
 import { BiMenuAltRight } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
   const link = (
@@ -15,6 +16,9 @@ const Navbar = () => {
       </li>
     </>
   );
+  const { name } = useAuth();
+  console.log(name);
+
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
