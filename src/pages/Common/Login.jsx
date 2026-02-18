@@ -1,6 +1,39 @@
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const { loginUser } = useAuth();
+  const navigate = useNavigate();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const userData = Object.fromEntries(formData.entries());
+    const { email, password } = userData;
+    console.log(email, password);
+
+    // login implement by firebase auth;
+
+    try {
+      loginUser(email, password)
+        .then((res) => {
+          console.log(res.user);
+          toast.success("User login successfully");
+          // <Navigate to={"/"}></Navigate>;
+          navigate("/");
+        })
+        .catch((err) => {
+          if (err) {
+            toast.error(`${err.code}`);
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div
       className="hero min-h-screen bg-base-200"
@@ -30,7 +63,7 @@ const Login = () => {
         </div>
 
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100/90 backdrop-blur-md border border-white/20">
-          <form className="card-body">
+          <form onSubmit={handleLogin} className="card-body">
             <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
 
             {/* Email Input */}

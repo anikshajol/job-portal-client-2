@@ -1,12 +1,49 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
+  const { createUser, profileUpdate } = useAuth();
+
   const handleRegister = (e) => {
     e.preventDefault();
-    // const form = e.target;
-    console.log(e.target.name.value);
-    console.log(e.target.checkbox.checked);
+    const form = e.target;
+    const formData = new FormData(form);
+    const userData = Object.fromEntries(formData.entries());
+    console.log(userData);
+    const { email, password, confirmPassword, name } = userData;
+    console.log(email, password);
+
+    if (password !== confirmPassword) {
+      return toast.error("Password not matched!");
+    }
+
+    if (!form.checkbox.checked) {
+      return toast.error("accept terms and conditions");
+    }
+    // register
+
+    try {
+      createUser(email, password)
+        .then((res) => {
+          profileUpdate(name)
+            .then(() => {
+              //update
+              console.log("profile update");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          toast.success("User created successfully");
+          console.log(res.user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div

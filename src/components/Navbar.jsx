@@ -1,6 +1,7 @@
 import { BiMenuAltRight } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const link = (
@@ -16,9 +17,20 @@ const Navbar = () => {
       </li>
     </>
   );
-  const { name } = useAuth();
-  console.log(name);
+  const { user, logOut } = useAuth();
+  const navigate = useNavigate();
 
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logout successfully");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  // console.log(name);
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -39,7 +51,11 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{link}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user && (
+          <button onClick={handleLogOut} className="btn">
+            Logout
+          </button>
+        )}
       </div>
     </div>
   );
