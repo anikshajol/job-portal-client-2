@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { loginUser } = useAuth();
+  const { loginUser, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
   const handleLogin = (e) => {
     e.preventDefault();
@@ -32,6 +32,20 @@ const Login = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // google login
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle()
+      .then((res) => {
+        console.log(res.user);
+        toast.success("User Login successfully");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -112,7 +126,7 @@ const Login = () => {
             </div>
 
             {/* Social Login */}
-            <div className="flex gap-2">
+            <div onClick={handleGoogleLogin} className="flex gap-2">
               <button className="btn btn-outline flex-1 gap-2">
                 <FcGoogle size={20} />
                 Google

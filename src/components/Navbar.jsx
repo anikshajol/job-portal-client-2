@@ -4,20 +4,24 @@ import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
   const link = (
     <>
       <li>
         <NavLink to={"/"}>Home</NavLink>
       </li>
-      <li>
-        <NavLink to={"login"}>Login</NavLink>
-      </li>
-      <li>
-        <NavLink to={"register"}>Register</NavLink>
-      </li>
+      {!user && (
+        <>
+          <li>
+            <NavLink to={"login"}>Login</NavLink>
+          </li>
+          <li>
+            <NavLink to={"register"}>Register</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
-  const { user, logOut } = useAuth();
   const navigate = useNavigate();
 
   const handleLogOut = () => {

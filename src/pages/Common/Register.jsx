@@ -2,11 +2,24 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { createUser, profileUpdate } = useAuth();
+  const { createUser, profileUpdate, signInWithGoogle } = useAuth();
+  const navigate = useNavigate();
+  // social signup
 
-  const handleRegister = (e) => {
+  const handleGoogleRegister = () => {
+    signInWithGoogle()
+      .then((res) => {
+        console.log(res.user);
+        toast.success("Account created successfully");
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // email , password register
+  const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
@@ -25,24 +38,13 @@ const Register = () => {
     // register
 
     try {
-      createUser(email, password)
-        .then((res) => {
-          profileUpdate(name)
-            .then(() => {
-              //update
-              console.log("profile update");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          toast.success("User created successfully");
-          console.log(res.user);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const res = await createUser(email, password);
+      await profileUpdate(name);
+      toast.success("Account created successfully");
+      console.log(res.user);
+      navigate("/");
     } catch (error) {
-      console.log(error);
+      console.log(error.code || "Registration failed");
     }
   };
   return (
@@ -175,7 +177,10 @@ const Register = () => {
             </div>
 
             {/* Social Register */}
-            <button className="btn btn-outline btn-secondary w-full gap-2">
+            <button
+              onClick={handleGoogleRegister}
+              className="btn btn-outline btn-secondary w-full gap-2"
+            >
               <FcGoogle size={20} />
               Signup with Google
             </button>
