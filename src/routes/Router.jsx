@@ -28,11 +28,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "/apply/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/jobs/${params.id}`),
         element: (
           <PrivateRoute>
             <ApplyNow></ApplyNow>
           </PrivateRoute>
         ),
+        hydrateFallbackElement: <Loader />,
       },
       {
         path: "login",

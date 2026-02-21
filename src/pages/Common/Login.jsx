@@ -44,7 +44,7 @@ const Login = () => {
       .then((res) => {
         console.log(res.user);
         toast.success("User Login successfully");
-        navigate("/");
+        navigate(location.pathname || "/");
       })
       .catch((err) => {
         console.log(err);
