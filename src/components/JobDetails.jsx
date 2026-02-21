@@ -5,7 +5,7 @@ import { CiLocationOn, CiCalendar, CiDollar, CiMail } from "react-icons/ci";
 import { IoArrowBackOutline } from "react-icons/io5";
 const JobDetails = () => {
   const job = useLoaderData();
-  console.log(job);
+  //   console.log(job);
   // Destructuring job data
   const {
     _id,

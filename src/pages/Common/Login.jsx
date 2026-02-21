@@ -1,11 +1,14 @@
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { loginUser, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  // console.log(location);
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -22,7 +25,7 @@ const Login = () => {
           console.log(res.user);
           toast.success("User login successfully");
           // <Navigate to={"/"}></Navigate>;
-          navigate("/");
+          navigate(location.state || "/");
         })
         .catch((err) => {
           if (err) {
