@@ -8,7 +8,7 @@ const Root = () => {
       <nav>
         <Navbar />
       </nav>
-      <main>
+      <main className="w-4/5 mx-auto">
         <Outlet></Outlet>
       </main>
     </>
