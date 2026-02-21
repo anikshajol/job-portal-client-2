@@ -3,7 +3,8 @@ import React from "react";
 import { motion, transform } from "motion/react";
 import { CiClock1, CiLocationOn } from "react-icons/ci";
 import { IoBagAdd } from "react-icons/io5";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+
 const JobCard = ({ job }) => {
   //   console.log(job);
   const {

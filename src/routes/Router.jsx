@@ -4,7 +4,11 @@ import Home from "../pages/Common/Home";
 import Login from "../pages/Common/Login";
 import Register from "../pages/Common/Register";
 import ErrorPage from "../pages/Common/ErrorPage";
-
+import JobDetails from "../components/JobDetails";
+import Loader from "../components/Loader";
+import PrivateRoute from "./PrivateRoute";
+import ApplyNow from "../pages/Candidate/ApplyNow";
+console.log("ROUTER FILE LOADED");
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -14,6 +18,21 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "jobs/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/jobs/${params.id}`),
+        element: <JobDetails />,
+        hydrateFallbackElement: <Loader />,
+      },
+      {
+        path: "/apply/:id",
+        element: (
+          <PrivateRoute>
+            <ApplyNow></ApplyNow>
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
