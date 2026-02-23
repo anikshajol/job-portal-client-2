@@ -1,18 +1,47 @@
 import React from "react";
 import { IoArrowBackOutline, IoSendOutline } from "react-icons/io5";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const ApplyNow = () => {
   const { id: jobId } = useParams();
   const navigate = useNavigate();
   const job = useLoaderData();
+  const { user } = useAuth();
   //   post
-  const handleApply = (e) => {
+  const handleApply = async (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const jobData = Object.fromEntries(formData.entries());
-    console.log(jobData, jobId);
+    const { linkedIn, github, resume } = jobData;
+    // console.log(linkedIn, github, resume);
+    const { email } = user;
+    const applicationData = {
+      jobId,
+      linkedIn,
+      github,
+      resume,
+      email,
+    };
+    console.log(applicationData);
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/applications",
+        applicationData,
+      );
+      console.log(res.data);
+
+      if (res.data.insertedId) {
+        toast.success("Your application submitted successfully");
+      }
+    } catch (error) {
+      console.log(error.response?.data?.message);
+      toast.error(error.response?.data?.message || "something went wrong");
+    }
   };
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4">

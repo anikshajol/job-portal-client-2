@@ -1,5 +1,5 @@
 import { BiMenuAltRight } from "react-icons/bi";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 
@@ -28,7 +28,7 @@ const Navbar = () => {
     logOut()
       .then(() => {
         toast.success("Logout successfully");
-        navigate("/");
+        navigate("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +49,9 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <Link to={"/"} className="btn btn-ghost text-xl">
+          JobPortal
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
