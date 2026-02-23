@@ -8,6 +8,7 @@ import JobDetails from "../components/JobDetails";
 import Loader from "../components/Loader";
 import PrivateRoute from "./PrivateRoute";
 import ApplyNow from "../pages/Candidate/ApplyNow";
+import MyApplications from "../pages/Candidate/MyApplications";
 console.log("ROUTER FILE LOADED");
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         hydrateFallbackElement: <Loader />,
+      },
+      {
+        path: "/my-applications",
+        element: (
+          <PrivateRoute>
+            <MyApplications></MyApplications>
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",

@@ -7,7 +7,7 @@ import team2 from "../assets/team2.jpg";
 const Banner = () => {
   return (
     <div className="hero bg-base-200 min-h-[90vh]">
-      <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content px-16 flex-col lg:flex-row-reverse">
         <figure>
           <motion.img
             src={team1}

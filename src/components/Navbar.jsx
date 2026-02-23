@@ -10,7 +10,14 @@ const Navbar = () => {
       <li>
         <NavLink to={"/"}>Home</NavLink>
       </li>
-      {!user && (
+
+      {user ? (
+        <>
+          <li>
+            <NavLink to={"my-applications"}>My Applications</NavLink>
+          </li>
+        </>
+      ) : (
         <>
           <li>
             <NavLink to={"login"}>Login</NavLink>
