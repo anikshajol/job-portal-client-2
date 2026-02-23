@@ -49,7 +49,7 @@ const ApplyNow = () => {
         {/* Back Button */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors mb-6"
+          className="flex items-center gap-2 text-gray-500 hover:text-primary transition-colors mb-6 cursor-pointer"
         >
           <IoArrowBackOutline /> ফিরে যান
         </button>
