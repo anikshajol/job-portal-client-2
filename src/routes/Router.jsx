@@ -9,6 +9,7 @@ import Loader from "../components/Loader";
 import PrivateRoute from "./PrivateRoute";
 import ApplyNow from "../pages/Candidate/ApplyNow";
 import MyApplications from "../pages/Candidate/MyApplications";
+import AddJob from "../components/Employer/AddJob";
 console.log("ROUTER FILE LOADED");
 export const router = createBrowserRouter([
   {
@@ -43,6 +44,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyApplications></MyApplications>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/add-job",
+        element: (
+          <PrivateRoute>
+            <AddJob></AddJob>
           </PrivateRoute>
         ),
       },

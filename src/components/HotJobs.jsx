@@ -13,7 +13,7 @@ const HotJobs = ({ jobsPromise }) => {
       </h1>
       <div className="md:border border-purple-900 max-w-2xs mx-auto mb-6"></div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-        {jobs.slice(0, 4).map((job) => (
+        {jobs.map((job) => (
           <JobCard key={job._id} job={job}></JobCard>
         ))}
       </div>

@@ -13,8 +13,13 @@ const Navbar = () => {
 
       {user ? (
         <>
+          {/* for applicant */}
           <li>
             <NavLink to={"my-applications"}>My Applications</NavLink>
+          </li>
+          {/* for recruiter */}
+          <li>
+            <NavLink to={"add-job"}>Add Job</NavLink>
           </li>
         </>
       ) : (

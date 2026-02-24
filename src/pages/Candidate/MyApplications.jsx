@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
-import MyApplicationsList from "../../components/Employer/MyApplicationsList";
-import { myApplicationsPromise } from "../../api/applicationApi";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../../components/Loader";
+import { myApplicationsPromise } from "../../api/applicationApi";
+import MyApplicationsList from "../../components/Candidates/MyApplicationsList";
 
 const MyApplications = () => {
   const { user } = useAuth();
