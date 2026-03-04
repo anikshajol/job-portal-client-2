@@ -10,6 +10,8 @@ import PrivateRoute from "./PrivateRoute";
 import ApplyNow from "../pages/Candidate/ApplyNow";
 import MyApplications from "../pages/Candidate/MyApplications";
 import AddJob from "../components/Employer/AddJob";
+import MyPostedJobs from "../pages/Employer/MyPostedJobs";
+import ViewApplicants from "../pages/Employer/ViewApplicants";
 console.log("ROUTER FILE LOADED");
 export const router = createBrowserRouter([
   {
@@ -54,6 +56,25 @@ export const router = createBrowserRouter([
             <AddJob></AddJob>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/my-postedJobs",
+        element: (
+          <PrivateRoute>
+            <MyPostedJobs></MyPostedJobs>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/view-applicants/:jobId",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/applications/job/${params.jobId}`),
+        element: (
+          <PrivateRoute>
+            <ViewApplicants></ViewApplicants>
+          </PrivateRoute>
+        ),
+        hydrateFallbackElement: <Loader />,
       },
       {
         path: "login",

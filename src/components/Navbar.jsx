@@ -21,6 +21,9 @@ const Navbar = () => {
           <li>
             <NavLink to={"add-job"}>Add Job</NavLink>
           </li>
+          <li>
+            <NavLink to={"my-postedJobs"}>My Posted Job</NavLink>
+          </li>
         </>
       ) : (
         <>
@@ -70,9 +73,12 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user && (
-          <button onClick={handleLogOut} className="btn">
-            Logout
-          </button>
+          <>
+            <button onClick={handleLogOut} className="btn">
+              Logout
+            </button>
+            <button className="btn">{user.email}</button>
+          </>
         )}
       </div>
     </div>

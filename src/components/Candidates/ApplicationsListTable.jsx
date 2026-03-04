@@ -79,6 +79,12 @@ const ApplicationsListTable = ({ app }) => {
           </svg>
         </button>
       </td>
+      {/* status */}
+      <td>
+        <button className="btn btn-circle btn-ghost btn-sm text-red-500 hover:bg-red-50">
+          {app.status}
+        </button>
+      </td>
     </tr>
   );
 };

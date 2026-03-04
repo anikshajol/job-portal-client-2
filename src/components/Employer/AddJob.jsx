@@ -1,6 +1,7 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AddJob = () => {
   const { user } = useAuth();
@@ -59,6 +60,9 @@ const AddJob = () => {
       try {
         const res = await axios.post("http://localhost:5000/jobs", jobs);
         console.log(res.data);
+        if (res.data.insertedId) {
+          toast.success("Job added successfully");
+        }
       } catch (error) {
         console.log(error);
       }

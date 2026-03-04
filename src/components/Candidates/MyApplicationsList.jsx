@@ -3,7 +3,7 @@ import ApplicationsListTable from "./ApplicationsListTable";
 
 const MyApplicationsList = ({ myApplicationsPromise }) => {
   const applications = use(myApplicationsPromise);
-  //   console.log(applications);
+  console.log(applications);
 
   return (
     <div className="overflow-x-auto w-full px-4 py-10">
@@ -29,6 +29,7 @@ const MyApplicationsList = ({ myApplicationsPromise }) => {
               <th>Links</th>
               <th>Resume</th>
               <th>Action</th>
+              <th>Status</th>
             </tr>
           </thead>
 
